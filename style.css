@@ -624,6 +624,32 @@ footer {
     color: var(--primary-color); /* Usa a variável dinâmica */
 }
 
+.btn-remover {
+  background-color: #e50914; /* Vermelho vivo */
+  color: white;              /* Cor do texto */
+  border: none;              /* Remove borda padrão */
+  padding: 8px 12px;         /* Espaçamento interno */
+  border-radius: 4px;        /* Borda arredondada */
+  cursor: pointer;           /* Cursor de mãozinha */
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 10px auto;
+}
+
+.btn-remover:hover {
+  background-color: #a00109; /* Vermelho mais escuro ao passar o mouse */
+}
+
+.empty-state {
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #666;
+  font-size: 1.2rem;
+  text-align: center;
+  max-width: 90%;
+}
 /* --- Responsividade --- */
 @media (min-width: 1920px) {
     body {
