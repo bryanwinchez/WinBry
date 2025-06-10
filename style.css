@@ -1,0 +1,842 @@
+/* Importação de fontes (opcional, Google Fonts ou similar) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* --- Variáveis CSS para Cores e Temas --- */
+/* Padrão para o modo escuro (Dark Mode) */
+:root {
+    --background-color: #141414;
+    --card-background: #1c1c1c;
+    --text-color: #e0e0e0;
+    --text-light: #a0a0a0;
+    --primary-color: #e50914; /* Vermelho Netflix */
+    --secondary-color: #404040;
+    --border-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Sobrescreve as variáveis para o modo claro quando a classe .light-mode está no body */
+body.light-mode {
+    --background-color: #f5f5f5;
+    --card-background: #ffffff;
+    --text-color: #333333;
+    --text-light: #666666;
+        /* --primary-color: #e50914;  Pode manter o vermelho principal ou mudar */
+    --secondary-color: #cccccc;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* --- Estilos Gerais --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color); /* preto */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color); /* Usa a variável dinâmica */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    color: var(--primary-color); /* Usa a variável dinâmica */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: #ff3b47; /* Um vermelho mais vivo */
+}
+
+/* Botões */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #c11119; /* Vermelho mais escuro no hover */
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color); /* Usa a variável dinâmica */
+    color: var(--text-color); /* Usa a variável dinâmica */
+    border: 1px solid var(--border-color); /* Usa a variável dinâmica */
+}
+.btn-secondary:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
+
+.btn-play {
+    background-color: #e50914;
+    color: var(--background-color); /* Usa a variável dinâmica para a cor do texto */
+    padding: 12px 25px;
+    font-size: 1.1em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-play i {
+    font-size: 1.2em;
+}
+.btn-play:hover {
+    background-color: #a00109;
+    transform: translateY(-2px);
+}
+
+.btn-info {
+    background-color: rgba(109, 109, 110, 0.7);
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+}
+.btn-info:hover {
+    background-color: rgba(109, 109, 110, 0.9);
+    transform: translateY(-2px);
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-color); /* Usa a variável dinâmica */
+    font-size: 1em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+}
+.icon-btn:hover {
+    color: var(--primary-color); /* Usa a variável dinâmica */
+}
+.icon-btn i {
+    font-size: 1.2em;
+}
+
+/* --- Header --- */
+header {
+    background-color: var(--background-color); /* Usa a variável dinâmica */
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px var(--shadow-color); /* Usa a variável dinâmica */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+header .container {
+    display: flex; /* Torna o container flexível */
+    justify-content: space-between; /* Espaça o logo do grupo de navegação/ações */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    flex-wrap: wrap; /* Permite que os itens quebrem a linha em telas menores */
+}
+
+.logo {
+    margin-right: auto; /* Empurra o logo para a esquerda, e o resto para a direita */
+    font-size: 30px;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex; /* Alinha os itens de navegação em linha */
+    gap: 25px;
+}
+.main-nav a {
+    color: var(--text-color); /* Usa a variável dinâmica */
+    font-weight: 500;
+    font-size: 1.1em;
+    position: relative;
+    padding-bottom: 5px;
+}
+.main-nav a:hover,
+.main-nav a.active {
+    color: #e50914; /* Cor para links ativos no menu */
+}
+.main-nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color); /* Usa a variável dinâmica */
+    border-radius: 2px;
+}
+
+.user-actions {
+    display: flex; /* Alinha os botões de ação do usuário em linha */
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px; /* Adiciona um espaço entre a navegação principal e as ações do usuário */
+}
+
+.menu-toggle {
+    display: none; /* Esconder por padrão, mostrar em telas pequenas */
+    background: none;
+    border: none;
+    color: var(--text-color); /* Usa a variável dinâmica */
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
+/* --- Hero Banner --- */
+.hero-banner {
+    position: relative;
+    width: 100%;
+    height: 600px; /* Altura fixa para o banner */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+.hero-banner .banner-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: brightness(50%); /* Escurece a imagem */
+}
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Usa a variável dinâmica para o gradiente de fundo */
+    background: linear-gradient(to top, var(--background-color) 0%, rgba(0,0,0,0) 50%, var(--background-color) 100%);
+    z-index: 2;
+    opacity: 1.0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    color: white;
+    text-align: center;
+    max-width: 700px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente para o texto */
+    border-radius: 10px;
+}
+.hero-content h1 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+.hero-actions .btn {
+    margin: 0 10px;
+}
+
+form {
+    margin: 0; /* Remove margens padrões */
+  }
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+.hero-actions {
+    display: flex;
+    gap: 10px; /* Espaço entre os botões */
+    justify-content: center;
+  }
+
+/* --- Seções de Conteúdo --- */
+.content-section {
+    padding: 40px 0;
+}
+.content-section h2 {
+    font-size: 2em;
+    margin-bottom: 25px;
+    color: var(--text-color); /* Usa a variável dinâmica */
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.content-card {
+    background-color: var(--card-background); /* Usa a variável dinâmica */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px var(--shadow-color); /* Usa a variável dinâmica */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: var(--text-color); /* Usa a variável dinâmica */
+    position: relative;
+}
+
+.content-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px var(--shadow-color); /* Usa a variável dinâmica */
+}
+
+.content-card img {
+    width: 100%;
+    height: 320px; /* Altura fixa para posters */
+    object-fit: cover;
+    display: block;
+}
+
+.card-info {
+    padding: 15px;
+}
+.card-info h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-info p {
+    font-size: 0.9em;
+    color: var(--text-light); /* Usa a variável dinâmica */
+}
+
+/* --- Page Header (para outras páginas) --- */
+.page-header {
+    background-color: var(--card-background); /* Usa a variável dinâmica */
+    padding: 60px 0 40px;
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 2px 5px var(--shadow-color); /* Usa a variável dinâmica */
+}
+.page-header h1 {
+    font-size: 3em;
+    color: var(--primary-color); /* Usa a variável dinâmica */
+}
+
+/* --- Páginas de Autenticação (Login/Cadastro) --- */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-image: url('../img/background-auth.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.login-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+textarea {
+  width: 100%;
+  /* opcional: altura maior */
+  height: 120px;
+  resize: vertical; /* permite redimensionar só verticalmente */
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.auth-wrapper {
+  overflow-y: auto; /* mostra barra vertical de rolagem quando necessário */
+  max-height: 100vh; /* limita a altura ao tamanho da tela */
+  position: fixed;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 90%;
+  max-width: 600px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 12px;               /* largura da barra */
+  background-color: var(--background-color); /* cor de fundo da barra */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--card-background);  /* cor da trilha */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);  /* cor do "dedo" da barra */
+  border-radius: 10px;
+  border: 3px solid var(--card-background); /* espaço em volta do dedo para dar efeito */
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #e50b1a; /* cor ao passar o mouse */
+}
+
+.auth-box {
+  background-color: var(--card-background);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px var(--shadow-color);
+  text-align: center;
+}
+
+.auth-box .logo-auth {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--primary-color); /* Usa a variável dinâmica */
+    margin-bottom: 0px;
+}
+.auth-box h2 {
+    font-size: 2em;
+    margin-bottom: 0px;
+    color: var(--text-color); /* Usa a variável dinâmica */
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color); /* Usa a variável dinâmica */
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color); /* Usa a variável dinâmica */
+    border-radius: 5px;
+    background-color: var(--secondary-color); /* Usa a variável dinâmica */
+    color: var(--text-color); /* Usa a variável dinâmica */
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color); /* Usa a variável dinâmica */
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.3);
+}
+
+.btn-full {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 1.1em;
+}
+
+.auth-link {
+    margin-top: 20px;
+    font-size: 0.95em;
+    color: var(--text-light); /* Usa a variável dinâmica */
+}
+.auth-link a {
+    color: var(--primary-color); /* Usa a variável dinâmica */
+    font-weight: 600;
+}
+
+
+/* --- Minha Conta --- */
+.account-details {
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.account-info-card {
+    background-color: var(--card-background); /* Usa a variável dinâmica */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px var(--shadow-color); /* Usa a variável dinâmica */
+}
+
+.account-info-card h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: var(--primary-color); /* Usa a variável dinâmica */
+}
+.account-info-card p {
+    margin-bottom: 10px;
+    font-size: 1.05em;
+    color: var(--text-color); /* Usa a variável dinâmica */
+}
+
+.account-info-card .btn {
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.watch-history {
+    list-style: none;
+}
+.watch-history li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color); /* Usa a variável dinâmica */
+}
+.watch-history li:last-child {
+    border-bottom: none;
+}
+.watch-history li a {
+    color: var(--text-color); /* Usa a variável dinâmica */
+    font-weight: 500;
+}
+.watch-history li a:hover {
+    color: var(--primary-color); /* Usa a variável dinâmica */
+}
+
+.empty-state {
+    text-align: center;
+    font-size: 1.2em;
+    color: var(--text-light); /* Usa a variável dinâmica */
+    padding: 50px 0;
+}
+
+/* --- Detalhes do Conteúdo --- */
+.details-hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 60px 0;
+    gap: 40px;
+}
+
+.details-poster {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px var(--shadow-color); /* Usa a variável dinâmica */
+    flex-shrink: 0; /* Não permite que a imagem encolha */
+}
+
+.details-info {
+    flex-grow: 1;
+    color: var(--text-color); /* Usa a variável dinâmica */
+}
+
+.details-info h1 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    color: var(--primary-color); /* Usa a variável dinâmica */
+}
+.details-meta {
+    font-size: 1.1em;
+    color: var(--text-light); /* Usa a variável dinâmica */
+    margin-bottom: 20px;
+}
+.details-description {
+    font-size: 1.05em;
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+.details-actions .btn {
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.details-cast,
+.details-genres {
+    margin-top: 25px;
+}
+.details-cast h3,
+.details-genres h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: var(--primary-color); /* Usa a variável dinâmica */
+}
+.details-cast p,
+.details-genres p {
+    font-size: 1.1em;
+    color: var(--text-light); /* Usa a variável dinâmica */
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--card-background); /* Usa a variável dinâmica */
+    color: var(--text-light); /* Usa a variável dinâmica */
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 50px;
+    box-shadow: 0 -2px 5px var(--shadow-color); /* Usa a variável dinâmica */
+}
+
+.social-links {
+    margin-top: 15px;
+}
+.social-links a {
+    color: var(--text-light); /* Usa a variável dinâmica */
+    font-size: 1.5em;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+.social-links a:hover {
+    color: var(--primary-color); /* Usa a variável dinâmica */
+}
+
+/* --- Responsividade --- */
+@media (min-width: 1920px) {
+    body {
+        font-size: 1.5em;
+    }
+
+    .hero-content h1 {
+        font-size: 4em;
+    }
+
+    .hero-content p {
+        font-size: 1.5em;
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
+    .hero-actions .btn {
+        padding: 20px 40px;
+        font-size: 1.2em;
+    }
+
+    .content-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    .content-card img {
+        height: 400px;
+    }
+
+    .main-nav ul {
+        font-size: 1.5em;
+        gap: 20px;
+    }
+
+    .details-hero {
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    .details-info h1 {
+        font-size: 4em;
+    }
+
+    .details-info p,
+    .details-meta {
+        font-size: 1.3em;
+    }
+
+    .details-actions .btn {
+        padding: 15px 30px;
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 992px) {
+    .main-nav {
+        display: none; /* Esconder navegação principal em telas menores */
+        width: 100%;
+        order: 3; /* Ir para a próxima linha */
+        margin-top: 20px;
+    }
+    .main-nav.active {
+        display: block; /* Mostrar navegação quando o menu-toggle é clicado */
+    }
+    .main-nav ul {
+        flex-direction: column; /* Links em coluna no mobile */
+        gap: 10px;
+        text-align: center;
+    }
+    .main-nav li {
+        width: 100%;
+    }
+    .user-actions {
+        order: 2; /* Move para antes do toggle em telas menores */
+        gap: 10px;
+        margin-left: auto; /* Garante que fiquem à direita */
+    }
+    .menu-toggle {
+        display: block; /* Mostrar botão de menu em telas menores */
+        order: 1; /* Mover para o início */
+        margin-left: 20px;
+    }
+    header .container {
+        justify-content: space-between; /* Ajusta novamente para ter espaço entre logo e user-actions/toggle */
+    }
+    .logo {
+        /* Nenhuma mudança aqui para manter o margin-right: auto padrão do Flexbox */
+    }
+
+    .hero-content h1 {
+        font-size: 2.8em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+    .hero-actions .btn {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+
+    .content-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+    .content-card img {
+        height: 240px;
+    }
+
+    .details-hero {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .details-poster {
+        max-width: 250px;
+    }
+    .details-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .details-actions .btn {
+        width: 80%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .details-info h1 {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 768px) {
+    header .container {
+        padding: 0 15px;
+    }
+    .user-actions a {
+        font-size: 0.9em;
+        gap: 3px;
+    }
+    .user-actions .btn {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+    .hero-banner {
+        height: 450px;
+    }
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    .hero-content p {
+        font-size: 0.9em;
+    }
+    .content-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+    }
+    .content-card img {
+        height: 200px;
+    }
+    .card-info h3 {
+        font-size: 1.1em;
+    }
+    .page-header h1 {
+        font-size: 2.5em;
+    }
+    .auth-box {
+        padding: 30px 20px;
+    }
+    .auth-box h2 {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-banner {
+        height: 350px;
+    }
+    .hero-content {
+        padding: 15px;
+    }
+    .hero-content h1 {
+        font-size: 1.8em;
+    }
+    .hero-content p {
+        font-size: 0.8em;
+        margin-bottom: 15px;
+    }
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .hero-actions .btn {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .content-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+    }
+    .content-card img {
+        height: 180px;
+    }
+    .page-header h1 {
+        font-size: 2em;
+    }
+    .details-info h1 {
+        font-size: 2em;
+    }
+    .details-meta {
+        font-size: 1em;
+    }
+    .details-description {
+        font-size: 0.9em;
+    }
+}
