@@ -164,6 +164,7 @@ header .container {
 .logo {
     margin-right: auto; /* Empurra o logo para a esquerda, e o resto para a direita */
     font-size: 30px;
+    font-weight: bold;
 }
 
 .main-nav ul {
