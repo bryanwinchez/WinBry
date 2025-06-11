@@ -167,6 +167,12 @@ header .container {
     font-weight: bold;
 }
 
+.fontlogo {
+    margin-right: auto; /* Empurra o logo para a esquerda, e o resto para a direita */
+    font-size: 30px;
+    font-weight: bold;
+}
+
 .main-nav ul {
     list-style: none;
     display: flex; /* Alinha os itens de navegação em linha */
