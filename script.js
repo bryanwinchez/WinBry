@@ -52,10 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Mock de Assistir Agora ---
-    const watchNowBtn = document.querySelector('action');
-    if (watchNowBtn) {
-        watchNowBtn.addEventListener('click', () => {
+        const form = document.getElementById('form-assistir');
+
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio automático
             alert('Você será direcionado a outra página e poderá soltar o play.');
+            window.location.href = form.action; // Redireciona manualmente
         });
     }
 
