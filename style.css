@@ -834,7 +834,7 @@ footer {
 
 @media (max-width: 576px) {
     .hero-banner {
-        height: 350px;
+        height: 600px;
     }
     .hero-content {
         padding: 15px;
