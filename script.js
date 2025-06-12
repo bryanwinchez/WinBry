@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Mock de Assistir Agora ---
-    const watchNowBtn = document.querySelector('.btn-play');
+    const watchNowBtn = document.querySelector('action');
     if (watchNowBtn) {
         watchNowBtn.addEventListener('click', () => {
             alert('Você será direcionado a outra página e poderá soltar o play.');
