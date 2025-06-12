@@ -12,7 +12,7 @@
     <header>
         <div class="container">
             <div class="logo">
-                <a href="index.html" class="fontlogo">WinBry+</a>
+                <a class="btn-log" class="btn-log" href="index.html">WinBry+</a>
             </div>
             <nav class="main-nav">
                 <ul>
@@ -27,7 +27,8 @@
                 <a href="formulario.html" class="icon-btn"><i class="fas fa-comments"></i> Solicitar</a>
                 <a href="minha-lista.html" class="icon-btn"><i class="fas fa-bookmark"></i> Minha Lista</a>
                 <a href="minha-conta.html" class="icon-btn"><i class="fas fa-user-circle"></i> Minha Conta</a>
-                <a href="login.html" class="btn btn-primary">Entrar</a>
+
+                <a id="user-action" href="login.html" class="btn btn-primary">Entrar</a>
             </div>
             <button class="menu-toggle"><i class="fas fa-bars"></i></button>
         </div>
@@ -186,5 +187,31 @@
         </div>
     </footer>
     <script src="script.js"></script> 
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (isLoggedIn && user) {
+        const avatar = user.profileImage || 'img/perfil-generico.jpg';
+        const btn    = document.getElementById('user-action');
+        btn.outerHTML = `
+          <a href="minha-conta.html" class="profile-btn" title="${user.username}">
+            <img src="${avatar}" alt="Perfil" class="profile-img"/>
+          </a>`;
+      }
+    });
+  </script>
+  <style>
+    .profile-btn {
+      display: inline-block;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .profile-img {
+      width:100%; height:100%;
+      object-fit:cover; border-radius:50%;
+    }
+  </style>
 </body>
 </html>

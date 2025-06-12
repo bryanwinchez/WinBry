@@ -51,24 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Mock de Login/Cadastro ---
-    const loginForm = document.querySelector('form[action="#"]');
-    if (loginForm) {
-        loginForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            const formType = loginForm.closest('.auth-box').querySelector('h2').textContent;
-
-            if (formType.includes('Entrar')) {
-                alert('Login mockado! As credenciais não são verificadas. Redirecionando para a página inicial.');
-                window.location.href = 'index.html';
-            } else if (formType.includes('Cadastrar')) {
-                alert('Cadastro mockado! Seus dados não são armazenados. Redirecionando para a página de login.');
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
     // --- Mock de Assistir Agora ---
     const watchNowBtn = document.querySelector('.btn-play');
     if (watchNowBtn) {
@@ -84,40 +66,41 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Funcionalidade de compartilhamento mockada! Imagine que você compartilhou este conteúdo.');
         });
     }
-  // Pega container da lista
+
+    // --- Script de Adicionar a Lista --- //
   const container = document.querySelector(".minha-lista-container");
 
-  // Atualiza visual da lista na página "Minha Lista"
   function atualizarMinhaLista() {
-    const lista = JSON.parse(localStorage.getItem("minhaLista")) || [];
-    console.log("Minha Lista no localStorage:", lista);
+  const lista = JSON.parse(localStorage.getItem("minhaLista")) || [];
 
-    if (!container) return;
+  if (!container) return;
 
-    if (lista.length === 0) {
-      container.innerHTML = `<p class="empty-state">Você ainda não adicionou nenhum item à sua lista. <a href="index.html">Explore agora!</a></p>`;
-      return;
-    }
+  if (lista.length === 0) {
+    container.classList.add("vazia");
+    container.innerHTML = `<p class="empty-state">Você ainda não adicionou nenhum item à sua lista. <a href="index.html">Explore agora!</a></p>`;
+    return;
+  } else {
+    container.classList.remove("vazia");
+  }
 
     let html = '';
     lista.forEach(item => {
       html += `
-  <div class="content-card">
-    <a href="${item.detalhesUrl || '#'}">
-      <img src="${item.poster || 'default-poster.jpg'}" alt="Poster do Filme ${item.titulo || 'Título Indefinido'}">
-      <div class="card-info">
-        <h3>${item.titulo || 'Título Indefinido'}</h3>
-        <p>${item.ano || 'Ano Desconhecido'} • ${item.genero || 'Gênero Desconhecido'}</p>
-      </div>
-    </a>
-    <button class="btn-remover" data-id="${item.id}">Remover da Lista</button>
-  </div>
-`;
+        <div class="content-card">
+          <a href="${item.detalhesUrl || '#'}">
+            <img src="${item.poster || 'default-poster.jpg'}" alt="Poster do Filme ${item.titulo || 'Título Indefinido'}">
+            <div class="card-info">
+              <h3>${item.titulo || 'Título Indefinido'}</h3>
+              <p>${item.ano || 'Ano Desconhecido'} • ${item.genero || 'Gênero Desconhecido'}</p>
+            </div>
+          </a>
+          <button class="btn-remover" data-id="${item.id}">Remover da Lista</button>
+        </div>
+      `;
     });
 
     container.innerHTML = html;
 
-    // Botão remover (fora do link para evitar problemas)
     container.querySelectorAll(".btn-remover").forEach(button => {
       button.addEventListener("click", (e) => {
         e.preventDefault();
@@ -127,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Remove item da lista e atualiza localStorage + visual
   function removerDaLista(id) {
     const lista = JSON.parse(localStorage.getItem("minhaLista")) || [];
     const novaLista = lista.filter(item => item.id !== id);
@@ -135,33 +117,23 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarMinhaLista();
   }
 
-  // Atualiza lista ao carregar a página
   atualizarMinhaLista();
 
-  // Botão para adicionar item na página de filme (se existir)
-  const btnAdicionar = document.querySelector(".btn-adicionar-lista");
-  if (btnAdicionar) {
-    btnAdicionar.addEventListener("click", () => {
-      const item = {
-  id: "homem-formiga-quantumania",
-  titulo: "Homem-Formiga e a Vespa: Quantumania",
-  poster: "homem-formiga-quantumania.jpg",
-  ano: "2023",
-  genero: "Ficção Científica",
-  detalhesUrl: "detalhes-homem-formiga-quantumania.html"
-};
+  document.querySelector("form").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-const lista = JSON.parse(localStorage.getItem("minhaLista")) || [];
-const jaExiste = lista.some(i => i.id === item.id);
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-if (!jaExiste) {
-  lista.push(item);
-  localStorage.setItem("minhaLista", JSON.stringify(lista));
-  alert("Adicionado à sua lista!");
-  atualizarMinhaLista();
-} else {
-  alert("Este item já está na sua lista.");
-}
-    });
-  }
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || user.email !== email || user.password !== password) {
+        alert("Usuário não encontrado ou senha incorreta.");
+        return;
+    }
+
+    // Login bem-sucedido: redirecionar
+    localStorage.setItem("loggedIn", "true");
+    window.location.href = "index.html";
+});
 });

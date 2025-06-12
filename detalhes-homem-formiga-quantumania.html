@@ -11,7 +11,7 @@
 <body class="dark-mode"> <header>
         <div class="container">
             <div class="logo">
-                <a href="index.html">WinBry+</a>
+                <a class="btn-log" href="index.html">WinBry+</a>
             </div>
             <nav class="main-nav">
                 <ul>
@@ -101,8 +101,35 @@
             </div>
         </div>
     </footer>
-    <script src="script.js">
-   
-    </script> 
+    <script src="script.js"> </script>
+   <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnAdicionar = document.querySelector(".btn-adicionar-lista");
+
+    if (btnAdicionar) {
+      btnAdicionar.addEventListener("click", () => {
+        const item = {
+          id: "homem-formiga-quantumania",
+          titulo: "Homem-Formiga e a Vespa: Quantumania",
+          poster: "homem-formiga-quantumania.jpg",
+          ano: "2023",
+          genero: "Ficção Científica",
+          detalhesUrl: "detalhes-homem-formiga-quantumania.html"
+        };
+
+        const lista = JSON.parse(localStorage.getItem("minhaLista")) || [];
+        const jaExiste = lista.some(i => i.id === item.id);
+
+        if (!jaExiste) {
+          lista.push(item);
+          localStorage.setItem("minhaLista", JSON.stringify(lista));
+          alert("Adicionado à sua lista!");
+        } else {
+          alert("Este item já está na sua lista.");
+        }
+      });
+    }
+  });
+</script>
 </body>
 </html>

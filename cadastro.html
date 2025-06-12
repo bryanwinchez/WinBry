@@ -1,40 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WinBry+ | Cadastro</title>
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WinBry+ | Cadastro</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 </head>
-<body>
-    <div class="auth-wrapper">
-        <div class="auth-box">
-            <a href="index.html" class="logo-auth">WinBry+</a>
-            <h2>Cadastrar</h2>
-            <form action="login.html" method="POST">
-                <div class="form-group">
-                    <label for="username">Nome de Usuário</label>
-                    <input type="text" id="username" name="username" required placeholder="Crie seu nome de usuário">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="Digite seu email">
-                </div>
-                <div class="form-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" required placeholder="Crie uma senha forte">
-                </div>
-                <div class="form-group">
-                    <label for="confirm-password">Confirmar Senha</label>
-                    <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirme sua senha">
-                </div>
-                <button type="submit" class="btn btn-primary btn-full">Cadastrar</button>
-                <p class="auth-link">Já tem uma conta? <a href="login.html">Entrar</a></p>
-            </form>
+<body class="dark-mode">
+  <div class="auth-wrapper">
+    <div class="auth-box">
+      <a href="index.html" class="logo-auth">WinBry+</a>
+      <h2>Cadastrar</h2>
+      <form id="cadastroForm">
+        <div class="form-group">
+          <label for="username">Nome de Usuário</label>
+          <input type="text" id="username" required placeholder="Crie seu nome de usuário">
         </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required placeholder="Digite seu email">
+        </div>
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" required placeholder="Crie uma senha forte">
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirmar Senha</label>
+          <input type="password" id="confirm-password" required placeholder="Confirme sua senha">
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Cadastrar</button>
+        <p class="auth-link">Já tem uma conta? <a href="login.html">Entrar</a></p>
+      </form>
     </div>
-    <script src="script.js"></script>
+  </div>
+
+   <script src="script.js"></script> 
+  <script>
+    document.getElementById("cadastroForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const email    = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const confirm  = document.getElementById("confirm-password").value;
+
+      if (password !== confirm) {
+        alert("As senhas não coincidem.");
+        return;
+      }
+      const existing = JSON.parse(localStorage.getItem("user"));
+      if (existing && existing.email === email) {
+        alert("Email já cadastrado.");
+        return;
+      }
+      const user = { username, email, password, profileImage: null };
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("isLoggedIn", "false");
+      alert("Cadastro realizado! Faça login.");
+      window.location.href = "login.html";
+    });
+  </script>
 </body>
 </html>

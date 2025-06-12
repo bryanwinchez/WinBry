@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WinchezFlix - Cadastro e Login</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #121212; color: #eee; margin:0; padding:0; display:flex; justify-content:center; align-items:center; height:100vh; }
+  .container { background:#222; padding: 20px; border-radius:8px; width:320px; }
+  h2 { margin-top:0; text-align:center; }
+  input[type=text], input[type=password], input[type=file] {
+    width: 100%; padding: 8px; margin: 6px 0 12px; border-radius:4px; border:none; 
+  }
+  button {
+    background: #E50914; color:#fff; border:none; padding: 10px; width:100%; border-radius:4px; cursor:pointer;
+    font-weight: bold;
+  }
+  button:hover { background:#b0060f; }
+  .link { margin-top: 12px; text-align:center; cursor:pointer; color:#bbb; }
+  .link:hover { text-decoration: underline; }
+  #profile-pic {
+    display:block;
+    margin: 10px auto;
+    width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #e50914;
+  }
+  .error { color:#ff6b6b; font-size: 0.9em; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<div class="container" id="cadastro-section">
+  <h2>Cadastro</h2>
+  <div class="error" id="cadastro-error"></div>
+  <input type="text" id="cadastro-usuario" placeholder="Usuário" autocomplete="off" />
+  <input type="password" id="cadastro-senha" placeholder="Senha" autocomplete="off" />
+  <button id="btn-cadastrar">Cadastrar</button>
+  <div class="link" id="link-para-login">Já tem conta? Entrar</div>
+</div>
+
+<div class="container" id="login-section" style="display:none;">
+  <h2>Entrar</h2>
+  <div class="error" id="login-error"></div>
+  <input type="text" id="login-usuario" placeholder="Usuário" autocomplete="off" />
+  <input type="password" id="login-senha" placeholder="Senha" autocomplete="off" />
+  <button id="btn-entrar">Entrar</button>
+  <div class="link" id="link-para-cadastro">Não tem conta? Cadastrar</div>
+</div>
+
+<div class="container" id="perfil-section" style="display:none; text-align:center;">
+  <h2>Bem-vindo, <span id="nome-usuario"></span>!</h2>
+  <img id="profile-pic" src="https://via.placeholder.com/120?text=Foto" alt="Foto de Perfil" />
+  <input type="file" id="input-foto" accept="image/*" />
+  <button id="btn-logout" style="margin-top: 15px; background:#444;">Sair</button>
+</div>
+
+<script>
+  // Elementos
+  const cadastroSection = document.getElementById('cadastro-section');
+  const loginSection = document.getElementById('login-section');
+  const perfilSection = document.getElementById('perfil-section');
+
+  const cadastroUsuario = document.getElementById('cadastro-usuario');
+  const cadastroSenha = document.getElementById('cadastro-senha');
+  const btnCadastrar = document.getElementById('btn-cadastrar');
+  const cadastroError = document.getElementById('cadastro-error');
+
+  const loginUsuario = document.getElementById('login-usuario');
+  const loginSenha = document.getElementById('login-senha');
+  const btnEntrar = document.getElementById('btn-entrar');
+  const loginError = document.getElementById('login-error');
+
+  const nomeUsuarioSpan = document.getElementById('nome-usuario');
+  const profilePic = document.getElementById('profile-pic');
+  const inputFoto = document.getElementById('input-foto');
+  const btnLogout = document.getElementById('btn-logout');
+
+  const linkParaLogin = document.getElementById('link-para-login');
+  const linkParaCadastro = document.getElementById('link-para-cadastro');
+
+  // Função para salvar usuário no localStorage
+  function salvarUsuario(usuario, senha, foto) {
+    const userObj = { senha, foto: foto || null };
+    localStorage.setItem('user_' + usuario.toLowerCase(), JSON.stringify(userObj));
+  }
+
+  // Função para obter dados do usuário
+  function obterUsuario(usuario) {
+    const data = localStorage.getItem('user_' + usuario.toLowerCase());
+    return data ? JSON.parse(data) : null;
+  }
+
+  // Função para setar usuário logado
+  function setUsuarioLogado(usuario) {
+    localStorage.setItem('usuarioLogado', usuario.toLowerCase());
+  }
+
+  // Função para obter usuário logado
+  function getUsuarioLogado() {
+    return localStorage.getItem('usuarioLogado');
+  }
+
+  // Função para limpar login
+  function limparUsuarioLogado() {
+    localStorage.removeItem('usuarioLogado');
+  }
+
+  // Mostrar tela cadastro
+  function mostrarCadastro() {
+    cadastroSection.style.display = 'block';
+    loginSection.style.display = 'none';
+    perfilSection.style.display = 'none';
+    cadastroError.textContent = '';
+  }
+
+  // Mostrar tela login
+  function mostrarLogin() {
+    cadastroSection.style.display = 'none';
+    loginSection.style.display = 'block';
+    perfilSection.style.display = 'none';
+    loginError.textContent = '';
+  }
+
+  // Mostrar perfil
+  function mostrarPerfil(usuario) {
+    cadastroSection.style.display = 'none';
+    loginSection.style.display = 'none';
+    perfilSection.style.display = 'block';
+
+    nomeUsuarioSpan.textContent = usuario;
+
+    const userData = obterUsuario(usuario);
+    if(userData && userData.foto) {
+      profilePic.src = userData.foto;
+    } else {
+      profilePic.src = 'https://via.placeholder.com/120?text=Foto';
+    }
+  }
+
+  // Checa se já está logado no início
+  window.onload = () => {
+    const usuarioLogado = getUsuarioLogado();
+    if(usuarioLogado) {
+      mostrarPerfil(usuarioLogado);
+    } else {
+      mostrarCadastro();
+    }
+  };
+
+  // Cadastro
+  btnCadastrar.onclick = () => {
+    const usuario = cadastroUsuario.value.trim();
+    const senha = cadastroSenha.value.trim();
+
+    if(!usuario || !senha) {
+      cadastroError.textContent = 'Preencha todos os campos.';
+      return;
+    }
+
+    if(obterUsuario(usuario)) {
+      cadastroError.textContent = 'Usuário já existe. Use outro.';
+      return;
+    }
+
+    salvarUsuario(usuario, senha);
+    cadastroError.style.color = 'limegreen';
+    cadastroError.textContent = 'Cadastro feito com sucesso! Agora faça login.';
+
+    // Limpar campos
+    cadastroUsuario.value = '';
+    cadastroSenha.value = '';
+  };
+
+  // Login
+  btnEntrar.onclick = () => {
+    const usuario = loginUsuario.value.trim();
+    const senha = loginSenha.value.trim();
+
+    if(!usuario || !senha) {
+      loginError.textContent = 'Preencha todos os campos.';
+      return;
+    }
+
+    const userData = obterUsuario(usuario);
+    if(!userData) {
+      loginError.textContent = 'Usuário não encontrado.';
+      return;
+    }
+
+    if(userData.senha !== senha) {
+      loginError.textContent = 'Senha incorreta.';
+      return;
+    }
+
+    setUsuarioLogado(usuario);
+    loginUsuario.value = '';
+    loginSenha.value = '';
+    loginError.textContent = '';
+    mostrarPerfil(usuario);
+  };
+
+  // Logout
+  btnLogout.onclick = () => {
+    limparUsuarioLogado();
+    mostrarLogin();
+  };
+
+  // Trocar para login
+  linkParaLogin.onclick = () => mostrarLogin();
+
+  // Trocar para cadastro
+  linkParaCadastro.onclick = () => mostrarCadastro();
+
+  // Trocar foto do perfil
+  inputFoto.onchange = () => {
+    const file = inputFoto.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      profilePic.src = reader.result;
+
+      // Salvar foto no localStorage
+      const usuario = getUsuarioLogado();
+      if(usuario) {
+        const userData = obterUsuario(usuario);
+        userData.foto = reader.result;
+        salvarUsuario(usuario, userData.senha, reader.result);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+</script>
+
+</body>
+</html>
