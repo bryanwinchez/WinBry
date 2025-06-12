@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const watchNowBtn = document.querySelector('.btn-play');
     if (watchNowBtn) {
         watchNowBtn.addEventListener('click', () => {
-            alert('Reprodução do vídeo (funcionalidade mockada)! Não há vídeo real para reproduzir.');
+            alert('Você será direcionado a outra página e poderá soltar o play.');
         });
     }
 
@@ -84,6 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
     let html = '';
+     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      if (!isLoggedIn) {
+        alert('Você precisa estar logado para ver o item na sua lista.');
+        window.location.href = 'login.html';
+        return;
+      }
     lista.forEach(item => {
       html += `
         <div class="content-card">
