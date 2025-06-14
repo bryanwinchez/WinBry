@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WinBry+ | Premonição 6</title>
+    <title>WinBry+ | The Boys</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -38,17 +38,15 @@
     <main>
         <section class="details-hero">
             <div class="container">
-                <img src="premonicao-6.jpg" alt="Poster do Filme Exemplo" class="details-poster">
+                <img src="the-boys.jpg" alt="Poster do Filme Exemplo" class="details-poster">
                 <div class="details-info">
-                    <h1>Premonição 6: Laços de Sangue</h1>
-                    <p class="details-meta">2025 • 18 • 1h 49min</p>
+                    <h1>Você</h1>
+                    <p class="details-meta">2019 • 18 • 4 Temporadas</p>
                     <p class="details-description">
-                        Atormentada por um pesadelo violento e recorrente, uma estudante universitária volta para casa
-                        em busca da única pessoa que pode ser capaz de quebrar o ciclo de morte e salvar sua família do
-                        terrível destino que inevitavelmente os aguarda.
+                       Em um mundo onde super-heróis são tratados como celebridades, mas escondem lados sombrios, um grupo de vigilantes conhecidos como "The Boys" tenta derrubá-los e expor seus crimes.
                     </p>
                     <div class="details-actions">
-                        <form id="form-assistir" action="premonicao-6.html">
+                        <form id="form-assistir" action="the-boys.html">
                             <button class="btn btn-play"><i class="fas fa-play"></i> Assistir</button>
                         </form>
                         <button class="btn btn-secondary btn-adicionar-lista"><i class="fas fa-plus"></i> Adicionar à
@@ -57,11 +55,11 @@
                     </div>
                     <div class="details-cast">
                         <h3>Elenco Principal</h3>
-                        <p>Tony Todd, Brec Bassinger, Teo Briones, Kaitlyn Santa Juana, Richard Harmon.</p>
+                        <p>Karl Urban, Jack Quaid, Antony Starr, Erin Moriarty, Laz Alonso, Karen Fukuhara</p>
                     </div>
                     <div class="details-genres">
                         <h3>Gêneros</h3>
-                        <p>Terror, Suspense, Mistério</p>
+                        <p>Ação, Drama, Super-herói, Satírico</p>
                     </div>
                 </div>
             </div>
@@ -71,25 +69,25 @@
             <div class="container">
                 <h2>Conteúdo Relacionado</h2>
                 <div class="content-grid">
-                   <a href="detalhes-resgate.html" class="content-card">
-                        <img src="resgate.jpg" alt="Poster do Filme 2">
+                    <a href="detalhes-deadpool-e-wolverine.html" class="content-card">
+                        <img src="deadpool-e-wolverine.jpg" alt="Poster do Filme 5">
                         <div class="card-info">
-                            <h3>Resgate</h3>
-                            <p>2020 • Ação</p>
+                            <h3>Deadpool e Wolverine</h3>
+                            <p>2024 • Ficção Científica</p>
                         </div>
                     </a>
-                    <a href="detalhes-pll.html" class="content-card">
-                        <img src="pretty-little-liars.jpg" alt="Poster da Série 1">
+                    <a href="detalhes-loki.html" class="content-card">
+                        <img src="loki.jpg" alt="Poster da Série 3">
                         <div class="card-info">
-                            <h3>Pretty Little Liars</h3>
-                            <p>2010-2017 • Mistério</p>
+                            <h3>Loki</h3>
+                            <p>2021-2023 • Ficção Científica</p>
                         </div>
                     </a>
-                    <a href="detalhes-karate-kid-lendas.html" class="content-card">
-                        <img src="karate-kid-lendas.jpg" alt="Poster do Filme 4">
+                    <a href="detalhes-the-boys.html" class="content-card">
+                        <img src="the-boys.jpg" alt="Poster da Série 2">
                         <div class="card-info">
-                            <h3>Karatê Kid: Lendas</h3>
-                            <p>2023 • Ação</p>
+                            <h3>The Boys</h3>
+                            <p>2019 • Ação</p>
                         </div>
                     </a>
                 </div>
@@ -107,7 +105,7 @@
             </div>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js"> </script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const btnAdicionar = document.querySelector(".btn-adicionar-lista");
@@ -115,12 +113,12 @@
             if (btnAdicionar) {
                 btnAdicionar.addEventListener("click", () => {
                     const item = {
-                        id: "premonicao-6",
-                        titulo: "Premonição 6: Laços de Sangue",
-                        poster: "premonicao-6.jpg",
-                        ano: "2025",
-                        genero: "Suspense",
-                        detalhesUrl: "detalhes-premonicao-6.html"
+                        id: "the-boys",
+                        titulo: "The Boys",
+                        poster: "the-boys.jpg",
+                        ano: "2019",
+                        genero: "Ação",
+                        detalhesUrl: "detalhes-the-boys.html"
                     };
 
                     const lista = JSON.parse(localStorage.getItem("minhaLista")) || [];
