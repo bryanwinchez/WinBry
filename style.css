@@ -1046,7 +1046,7 @@ footer {
         font-size: 1.1em; /* Diminui um pouco os ícones se necessário */
     }
 
-        /* ADICIONADO: Media query para telas grandes / TVs */
+/* ADICIONADO & MODIFICADO: Media query para telas grandes / TVs */
 @media (min-width: 1600px) {
     :root {
         font-size: 18px; 
@@ -1064,8 +1064,13 @@ footer {
         font-size: 32px; 
     }
 
+    .main-nav ul {
+        gap: 40px; /* Aumenta o espaço entre os itens do menu */
+    }
+
     .hero-banner {
         height: 80vh; 
+        display: flex; /* Garante que o banner seja exibido */
     }
 
     .hero-content h1 {
@@ -1077,12 +1082,17 @@ footer {
         max-width: 650px;
     }
 
+    .hero-actions {
+        gap: 25px; /* Aumenta o espaço entre os botões do banner */
+    }
+
     .btn {
         padding: 15px 30px; 
     }
 
     .brand-hubs {
         padding: 80px 0;
+        display: block; /* Garante que a seção de hubs seja exibida */
     }
     
     .hub-card {
@@ -1094,12 +1104,13 @@ footer {
     }
 
     .content-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 30px; 
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Aumenta o tamanho mínimo dos cards */
+        gap: 40px; /* Aumenta o espaço entre os cards */
     }
 
     .content-card img {
-        height: 380px; 
+        height: 420px; /* Aumenta a altura da imagem do card */
     }
+}
 }
 }
