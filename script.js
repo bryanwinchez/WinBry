@@ -5,14 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function applyTheme(theme) {
         if (theme === 'dark') {
-            body.classList.add('dark-mode');
             body.classList.remove('light-mode');
+            body.classList.add('dark-mode');
             if (themeToggle) {
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             }
         } else {
-            body.classList.add('light-mode');
             body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
             if (themeToggle) {
                 themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
             }
@@ -42,14 +42,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Menu Responsivo ---
-    const menuToggle = document.querySelector('.menu-toggle');
+    // MODIFICADO: O logo agora funciona como o gatilho do menu em telas menores
+    const logoMenuButton = document.querySelector('.logo');
     const mainNav = document.querySelector('.main-nav');
 
-    if (menuToggle && mainNav) {
-        menuToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
+    if (logoMenuButton && mainNav) {
+        logoMenuButton.addEventListener('click', (event) => {
+            // Apenas executa a lógica do menu se a janela for menor ou igual a 992px (onde o menu dropdown é ativado)
+            // Isso garante que o logo continue funcionando como um link para a home em telas maiores.
+            if (window.innerWidth <= 992) {
+                event.preventDefault(); // Previne a ação padrão do link (recarregar a página)
+                mainNav.classList.toggle('active');
+            }
         });
     }
+
 
     // --- Mock de Assistir Agora ---
         const form = document.getElementById('form-assistir');
@@ -128,21 +135,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   atualizarMinhaLista();
 
-  document.querySelector("form").addEventListener("submit", function(e) {
-    e.preventDefault();
+  const loginForm = document.querySelector("form"); // Seleciona o formulário de login
+  if (loginForm) {
+      loginForm.addEventListener("submit", function(e) {
+        e.preventDefault();
 
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
 
-    const user = JSON.parse(localStorage.getItem("user"));
+        if (emailInput && passwordInput) {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
 
-    if (!user || user.email !== email || user.password !== password) {
-        alert("Usuário não encontrado ou senha incorreta.");
-        return;
-    }
+            const user = JSON.parse(localStorage.getItem("user"));
 
-    // Login bem-sucedido: redirecionar
-    localStorage.setItem("loggedIn", "true");
-    window.location.href = "index.html";
-});
+            if (!user || user.email !== email || user.password !== password) {
+                alert("Usuário não encontrado ou senha incorreta.");
+                return;
+            }
+
+            // Login bem-sucedido: redirecionar
+            localStorage.setItem("loggedIn", "true");
+            window.location.href = "index.html";
+        }
+    });
+  }
 });
