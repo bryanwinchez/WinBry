@@ -1,30 +1,34 @@
 /* Importação de fontes (opcional, Google Fonts ou similar) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
 
 /* --- Variáveis CSS para Cores e Temas --- */
-/* Padrão para o modo escuro (Dark Mode) */
+/* Padrão para o modo escuro (Dark Mode) - TEMA HBO MAX */
 :root {
-    --background-color: #141414;
-    --card-background: #1c1c1c;
-    --text-color: #e0e0e0;
-    --text-light: #a0a0a0;
-    --primary-color: #e50914;
-    /* Vermelho Netflix */
-    --secondary-color: #404040;
-    --border-color: #333;
-    --shadow-color: rgba(0, 0, 0, 0.5);
-
+    /* Esta é a cor que fica FORA da área de conteúdo principal (a "mesa") */
+    --page-background: #0b0a0f; /* Preto azulado do Max */
+    
+    /* Esta é a cor que você quer para o fundo do seu conteúdo (o "cartão") */
+    --main-content-background: #0b0a0f; /* Mesmo fundo para um visual contínuo */
+    
+    --card-background: #0b0a0f;
+    --text-color: #f5f5f7;
+    --text-light: #a1a1a6;
+    --primary-color: #0d5eff; /* Azul vibrante do Max */
+    --border-color: #2c2c2e;
+    --shadow-color: rgba(0, 0, 0, 0.5); 
+    --secondary-color: #2c2c2e; /* Adicionado para consistência */
 }
 
 /* Sobrescreve as variáveis para o modo claro quando a classe .light-mode está no body */
 body.light-mode {
-    --background-color: #f5f5f5;
+    --page-background: #0b0a0f;
+    --main-content-background: #ffffff;
     --card-background: #ffffff;
-    --text-color: #979797;
-    --text-light: #666666;
-    /* --primary-color: #e50914;  Pode manter o vermelho principal ou mudar */
-    --secondary-color: #cccccc;
-    --border-color: #e0e0e0;
+    --text-color: #939393;
+    --text-light: #515154;
+    --primary-color: #0066cc; /* Azul mais escuro para modo claro */
+    --secondary-color: #e5e5e7;
+    --border-color: #d2d2d7;
     --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -40,34 +44,36 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: var(--background-color);
-    /* preto */
+    background-color: var(--page-background);
+    overflow-x: hidden; /* Impede a barra de rolagem horizontal causada pelo truque do banner */
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif; /* Fonte trocada para combinar com o tema */
     line-height: 1.6;
     color: var(--text-color);
-    /* Usa a variável dinâmica */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+main {
+    padding-top: 80px; /* Espaço para o header fixo */
+    background-color: var(--main-content-background);
+}
+
 .container {
-    max-width: 1200px;
+    max-width: 99%;
     margin: 0 auto;
     padding: 0 20px;
 }
 
 a {
     color: var(--primary-color);
-    /* Usa a variável dinâmica */
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #ff3b47;
-    /* Um vermelho mais vivo */
+    color: color-mix(in srgb, var(--primary-color), white 20%); /* Azul mais vivo */
 }
 
 /* Botões */
@@ -88,18 +94,14 @@ a:hover {
 }
 
 .btn-primary:hover {
-    background-color: #c11119;
-    /* Vermelho mais escuro no hover */
+    background-color: color-mix(in srgb, var(--primary-color), black 20%); /* Azul mais escuro no hover */
     transform: translateY(-2px);
 }
 
 .btn-secondary {
     background-color: var(--secondary-color);
-    /* Usa a variável dinâmica */
     color: var(--text-color);
-    /* Usa a variável dinâmica */
     border: 1px solid var(--border-color);
-    /* Usa a variável dinâmica */
 }
 
 .btn-secondary:hover {
@@ -108,8 +110,8 @@ a:hover {
 }
 
 .btn-play {
-    background-color: #e50914;
-    color: black;
+    background-color: var(--text-color);
+    color: var(--page-background); /* Corrigido para usar o fundo da página */
     font-size: 1.1em;
     display: inline-flex;
     align-items: center;
@@ -119,6 +121,7 @@ a:hover {
     text-align: center;
     padding: 12px 30px;
     justify-content: center;
+    border-radius: 30px; /* Arredondado */
 }
 
 .btn-play i {
@@ -126,7 +129,8 @@ a:hover {
 }
 
 .btn-play:hover {
-    background-color: #a00109;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     transform: translateY(-2px);
 }
 
@@ -138,8 +142,9 @@ a:hover {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    border: none;
+    border: 1px solid rgba(255,255,255,0.2); /* Borda sutil */
     justify-content: center;
+    border-radius: 30px; /* Arredondado */
 }
 
 .btn-info:hover {
@@ -151,7 +156,6 @@ a:hover {
     background: none;
     border: none;
     color: var(--text-color);
-    /* Usa a variável dinâmica */
     font-size: 1em;
     cursor: pointer;
     display: inline-flex;
@@ -162,7 +166,6 @@ a:hover {
 
 .icon-btn:hover {
     color: var(--primary-color);
-    /* Usa a variável dinâmica */
 }
 
 .icon-btn i {
@@ -171,44 +174,39 @@ a:hover {
 
 /* --- Header --- */
 header {
-    background-color: var(--background-color);
-    /* Usa a variável dinâmica */
-    padding: 20px 0;
-    position: sticky;
+    background-color: var(--header-background); /* Alterado para usar o fundo com blur */
+    padding: 15px 0;
+    position: fixed; /* Header fixo */
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1000;
-    box-shadow: 0 2px 5px var(--shadow-color);
-    /* Usa a variável dinâmica */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: none; /* Removido shadow para um look mais limpo */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
 }
 
 header .container {
     display: flex;
-    /* Torna o container flexível */
     justify-content: space-between;
-    /* Espaça o logo do grupo de navegação/ações */
     align-items: center;
-    /* Alinha os itens verticalmente ao centro */
-    flex-wrap: wrap;
-    /* Permite que os itens quebrem a linha em telas menores */
+    flex-wrap: nowrap; /* Impede a quebra de linha */
 }
 
 .logo {
     margin-right: auto;
-    /* Empurra o logo para a esquerda, e o resto para a direita */
     font-size: 30px;
 }
 
 .main-nav ul {
     list-style: none;
     display: flex;
-    /* Alinha os itens de navegação em linha */
     gap: 25px;
 }
 
 .main-nav a {
     color: var(--text-color);
-    /* Usa a variável dinâmica */
     font-weight: 500;
     font-size: 1.1em;
     position: relative;
@@ -217,8 +215,7 @@ header .container {
 
 .main-nav a:hover,
 .main-nav a.active {
-    color: #e50914;
-    /* Cor para links ativos no menu */
+    color: var(--primary-color); /* Cor para links ativos no menu */
 }
 
 .main-nav a.active::after {
@@ -229,53 +226,46 @@ header .container {
     width: 100%;
     height: 3px;
     background-color: var(--primary-color);
-    /* Usa a variável dinâmica */
     border-radius: 2px;
 }
 
 .user-actions {
     display: flex;
-    /* Alinha os botões de ação do usuário em linha */
     align-items: center;
     gap: 15px;
     margin-left: 30px;
-    /* Adiciona um espaço entre a navegação principal e as ações do usuário */
 }
 
 .menu-toggle {
     display: none;
-    /* Esconder por padrão, mostrar em telas pequenas */
     background: none;
     border: none;
     color: var(--text-color);
-    /* Usa a variável dinâmica */
     font-size: 1.8em;
     cursor: pointer;
 }
 
-/* --- Hero Banner --- */
+/* --- BANNER PRINCIPAL (HERO) --- */
+
+
 .hero-banner {
     position: relative;
-    width: 100%;
-    height: 600px;
-    /* Altura fixa para o banner */
+    height: 75vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-bottom: 40px;
+    align-items: center; /* Alinha o conteúdo verticalmente ao centro */
+    width: 100vw; 
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.hero-banner .banner-img {
+.banner-img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 1;
-    filter: brightness(50%);
-    /* Escurece a imagem */
+    z-index: 1; /* Imagem na camada de baixo */
 }
 
 .hero-banner::before {
@@ -285,43 +275,58 @@ header .container {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Usa a variável dinâmica para o gradiente de fundo */
-    background: linear-gradient(to top, var(--background-color) 0%, rgba(0, 0, 0, 0) 50%, var(--background-color) 100%);
-    z-index: 2;
-    opacity: 1.0;
+    background: linear-gradient(90deg, rgba(11, 10, 15, 0.9) 0%, rgba(11, 10, 15, 0) 70%);
+    z-index: 2; /* Gradiente sobre a imagem */
+}
+
+.hero-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 80px 40px var(--page-background); /* Sombra interna com a cor de fundo */
+    z-index: 3; /* Sombra sobre o gradiente */
+    pointer-events: none; /* Garante que a sombra não bloqueie cliques */
+}
+
+.hero-banner .container {
+    position: relative;
+    z-index: 4; /* Texto sobre tudo */
+    width: 100%;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 3;
-    color: white;
-    text-align: center;
-    max-width: 700px;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.4);
-    /* Fundo semi-transparente para o texto */
-    border-radius: 10px;
+    max-width: 40%;
+    background: none;
+    text-align: left;
+    padding: 0;
+    border-radius: 0;
 }
 
 .hero-content h1 {
-    font-size: 3.5em;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
 }
 
 .hero-content p {
-    font-size: 1.2em;
+    font-size: 1.1rem;
     margin-bottom: 25px;
-    line-height: 1.4;
+    line-height: 1.6;
+    max-width: 500px;
 }
 
-.hero-actions .btn {
-    margin: 0 10px;
+.hero-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
 }
 
 form {
     margin: 0;
-    /* Remove margens padrões */
 }
 
 button {
@@ -330,57 +335,115 @@ button {
     cursor: pointer;
 }
 
-.hero-actions {
-    display: flex;
-    gap: 10px;
-    /* Espaço entre os botões */
-    justify-content: center;
+/* ================================== */
+/* HUBS DE MARCAS (ESTILO MAX)        */
+/* ================================== */
+.brand-hubs {
+    padding: 50px 0;
+    margin-top: 0px; /* Sobrepõe um pouco o banner */
+    position: relative;
+    z-index: 5;
+}
+
+.hubs-grid {
+    display: flex; /* MUDANÇA: Altera para flexbox para criar uma linha rolável */
+    overflow-x: auto; /* MUDANÇA: Adiciona a barra de rolagem horizontal */
+    gap: 20px;
+    padding-bottom: 20px; /* MUDANÇA: Adiciona espaço abaixo dos cards para a barra de rolagem */
+}
+
+.hub-card {
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    flex: 0 0 220px; /* MUDANÇA: Define um tamanho base para os cards para que não sejam espremidos */
+    background-color: var(--card-background); /* CORREÇÃO: Variável de cor corrigida */
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    cursor: pointer;
+    aspect-ratio: 16/9;
+}
+
+.hub-card:hover {
+    transform: scale(1.08);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 25px rgba(13, 94, 255, 0.5);
+    z-index: 10;
+}
+
+.hub-card img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* Logo fica acima do vídeo */
+    transition: all 0.4s ease;
+}
+
+.hub-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Vídeo fica atrás do logo */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.hub-card:hover video {
+    opacity: 1;
+}
+
+.hub-card:hover img {
+    transform: translate(-50%, -50%) scale(1.01); /* Leve crescimento para destacar */
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8)); /* Sombra para dar profundidade */
 }
 
 /* --- Seções de Conteúdo --- */
 .content-section {
     padding: 40px 0;
     width: 100%;
-    background-color: #0D0D0D;
+    background-color: transparent;
 }
 
 .content-section h2 {
     font-size: 2em;
     margin-bottom: 25px;
+    padding: 0 20px;
     color: var(--text-color);
-    /* Usa a variável dinâmica */
 }
 
 .content-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
+    padding: 0 20px;
 }
 
 .content-card {
     background-color: var(--card-background);
-    /* Usa a variável dinâmica */
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px var(--shadow-color);
-    /* Usa a variável dinâmica */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     text-decoration: none;
     color: var(--text-color);
-    /* Usa a variável dinâmica */
     position: relative;
 }
 
 .content-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 20px var(--shadow-color);
-    /* Usa a variável dinâmica */
 }
 
 .content-card img {
     width: 100%;
     height: 320px;
-    /* Altura fixa para posters */
     object-fit: cover;
     display: block;
 }
@@ -400,24 +463,20 @@ button {
 .card-info p {
     font-size: 0.9em;
     color: var(--text-light);
-    /* Usa a variável dinâmica */
 }
 
 /* --- Page Header (para outras páginas) --- */
 .page-header {
     background-color: var(--card-background);
-    /* Usa a variável dinâmica */
     padding: 60px 0 40px;
     margin-bottom: 40px;
     text-align: center;
     box-shadow: 0 2px 5px var(--shadow-color);
-    /* Usa a variável dinâmica */
 }
 
 .page-header h1 {
     font-size: 3em;
     color: var(--primary-color);
-    /* Usa a variável dinâmica */
 }
 
 /* --- Páginas de Autenticação (Login/Cadastro) --- */
@@ -443,22 +502,18 @@ button {
 
 textarea {
     width: 100%;
-    /* opcional: altura maior */
     height: 120px;
     resize: vertical;
-    /* permite redimensionar só verticalmente */
     padding: 10px;
     font-size: 1em;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     box-sizing: border-box;
 }
 
 .auth-wrapper {
     overflow-y: auto;
-    /* mostra barra vertical de rolagem quando necessário */
     max-height: 100vh;
-    /* limita a altura ao tamanho da tela */
     position: fixed;
     top: 0px;
     left: 50%;
@@ -472,29 +527,24 @@ textarea {
 
 ::-webkit-scrollbar {
     width: 12px;
-    /* largura da barra */
-    background-color: var(--background-color);
-    /* cor de fundo da barra */
+    height: 12px; /* Adicionado para a barra horizontal */
+    background-color: var(--page-background);
 }
 
 ::-webkit-scrollbar-track {
     background: var(--card-background);
-    /* cor da trilha */
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--primary-color);
-    /* cor do "dedo" da barra */
     border-radius: 10px;
     border: 3px solid var(--card-background);
-    /* espaço em volta do dedo para dar efeito */
     transition: background-color 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #e50b1a;
-    /* cor ao passar o mouse */
+    background-color: color-mix(in srgb, var(--primary-color), white 20%);
 }
 
 .auth-box {
@@ -509,7 +559,6 @@ textarea {
     font-size: 2.5em;
     font-weight: 700;
     color: var(--primary-color);
-    /* Usa a variável dinâmica */
     margin-bottom: 0px;
 }
 
@@ -517,7 +566,6 @@ textarea {
     font-size: 2em;
     margin-bottom: 0px;
     color: var(--text-color);
-    /* Usa a variável dinâmica */
 }
 
 .form-group {
@@ -530,7 +578,6 @@ textarea {
     margin-bottom: 8px;
     font-weight: 600;
     color: var(--text-color);
-    /* Usa a variável dinâmica */
 }
 
 .form-group input[type="email"],
@@ -539,12 +586,9 @@ textarea {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid var(--border-color);
-    /* Usa a variável dinâmica */
     border-radius: 5px;
     background-color: var(--secondary-color);
-    /* Usa a variável dinâmica */
     color: var(--text-color);
-    /* Usa a variável dinâmica */
     font-size: 1em;
     transition: border-color 0.3s ease;
 }
@@ -552,8 +596,7 @@ textarea {
 .form-group input:focus {
     outline: none;
     border-color: var(--primary-color);
-    /* Usa a variável dinâmica */
-    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.3);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color), transparent 70%);
 }
 
 .btn-full {
@@ -567,12 +610,10 @@ textarea {
     margin-top: 20px;
     font-size: 0.95em;
     color: var(--text-light);
-    /* Usa a variável dinâmica */
 }
 
 .auth-link a {
     color: var(--primary-color);
-    /* Usa a variável dinâmica */
     font-weight: 600;
 }
 
@@ -587,25 +628,21 @@ textarea {
 
 .account-info-card {
     background-color: var(--card-background);
-    /* Usa a variável dinâmica */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px var(--shadow-color);
-    /* Usa a variável dinâmica */
 }
 
 .account-info-card h2 {
     font-size: 1.8em;
     margin-bottom: 20px;
     color: var(--primary-color);
-    /* Usa a variável dinâmica */
 }
 
 .account-info-card p {
     margin-bottom: 10px;
     font-size: 1.05em;
     color: var(--text-color);
-    /* Usa a variável dinâmica */
 }
 
 .account-info-card .btn {
@@ -620,7 +657,6 @@ textarea {
 .watch-history li {
     padding: 10px 0;
     border-bottom: 1px solid var(--border-color);
-    /* Usa a variável dinâmica */
 }
 
 .watch-history li:last-child {
@@ -629,13 +665,11 @@ textarea {
 
 .watch-history li a {
     color: var(--text-color);
-    /* Usa a variável dinâmica */
     font-weight: 500;
 }
 
 .watch-history li a:hover {
     color: var(--primary-color);
-    /* Usa a variável dinâmica */
 }
 
 /* --- Detalhes do Conteúdo --- */
@@ -653,28 +687,23 @@ textarea {
     height: auto;
     border-radius: 10px;
     box-shadow: 0 8px 16px var(--shadow-color);
-    /* Usa a variável dinâmica */
     flex-shrink: 0;
-    /* Não permite que a imagem encolha */
 }
 
 .details-info {
     flex-grow: 1;
     color: var(--text-color);
-    /* Usa a variável dinâmica */
 }
 
 .details-info h1 {
     font-size: 3.5em;
     margin-bottom: 10px;
     color: var(--primary-color);
-    /* Usa a variável dinâmica */
 }
 
 .details-meta {
     font-size: 1.1em;
     color: var(--text-light);
-    /* Usa a variável dinâmica */
     margin-bottom: 20px;
 }
 
@@ -699,27 +728,20 @@ textarea {
     font-size: 1.4em;
     margin-bottom: 10px;
     color: var(--primary-color);
-    /* Usa a variável dinâmica */
 }
 
 .details-cast p,
 .details-genres p {
     font-size: 1.1em;
     color: var(--text-light);
-    /* Usa a variável dinâmica */
 }
 
 /* --- Footer --- */
 footer {
-    background-color: var(--card-background);
-    /* Usa a variável dinâmica */
-    color: var(--text-light);
-    /* Usa a variável dinâmica */
     padding: 30px 0;
     text-align: center;
-    margin-top: 50px;
-    box-shadow: 0 -2px 5px var(--shadow-color);
-    /* Usa a variável dinâmica */
+    color: var(--text-light);
+    background-color: var(--main-content-background); 
 }
 
 .social-links {
@@ -728,7 +750,6 @@ footer {
 
 .social-links a {
     color: var(--text-light);
-    /* Usa a variável dinâmica */
     font-size: 1.5em;
     margin: 0 10px;
     transition: color 0.3s ease;
@@ -736,30 +757,22 @@ footer {
 
 .social-links a:hover {
     color: var(--primary-color);
-    /* Usa a variável dinâmica */
 }
 
 .btn-remover {
-    background-color: #e50914;
-    /* Vermelho vivo */
+    background-color: var(--primary-color);
     color: white;
-    /* Cor do texto */
     border: none;
-    /* Remove borda padrão */
     padding: 8px 12px;
-    /* Espaçamento interno */
     border-radius: 4px;
-    /* Borda arredondada */
     cursor: pointer;
-    /* Cursor de mãozinha */
     transition: background-color 0.3s ease;
     display: block;
     margin: 10px auto;
 }
 
 .btn-remover:hover {
-    background-color: #a00109;
-    /* Vermelho mais escuro ao passar o mouse */
+    background-color: color-mix(in srgb, var(--primary-color), black 20%);
 }
 
 .minha-lista-container.vazia {
@@ -767,9 +780,7 @@ footer {
     justify-content: center;
     align-items: center;
     min-height: 60vh;
-    /* ocupa 60% da altura da tela para centralização vertical */
     text-align: center;
-    /* centraliza o texto dentro do <p> */
 }
 
 .empty-state {
@@ -780,84 +791,25 @@ footer {
 
 .btn-log {
     margin-right: auto;
-    /* Empurra o logo para a esquerda, e o resto para a direita */
     font-size: 30px;
     font-weight: bold;
 }
 
-/* --- Responsividade --- */
-@media (min-width: 1920px) {
-    body {
-        font-size: 1.5em;
-    }
-
-    .hero-content h1 {
-        font-size: 4em;
-    }
-
-    .hero-content p {
-        font-size: 1.5em;
-        max-width: 80%;
-        margin: 0 auto;
-    }
-
-    .hero-actions .btn {
-        padding: 20px 40px;
-        font-size: 1.2em;
-    }
-
-    .content-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 30px;
-    }
-
-    .content-card img {
-        height: 400px;
-    }
-
-    .main-nav ul {
-        font-size: 1.5em;
-        gap: 20px;
-    }
-
-    .details-hero {
-        max-width: 1600px;
-        margin: 0 auto;
-    }
-
-    .details-info h1 {
-        font-size: 4em;
-    }
-
-    .details-info p,
-    .details-meta {
-        font-size: 1.3em;
-    }
-
-    .details-actions .btn {
-        padding: 15px 30px;
-        font-size: 1.2em;
-    }
-}
-
+/* --- MODIFICADO: Responsividade --- */
 @media (max-width: 992px) {
     .main-nav {
         display: none;
-        /* Esconder navegação principal em telas menores */
         width: 100%;
         order: 3;
-        /* Ir para a próxima linha */
         margin-top: 20px;
     }
 
     .main-nav.active {
         display: block;
-        /* Mostrar navegação quando o menu-toggle é clicado */
     }
 
     .main-nav ul {
         flex-direction: column;
-        /* Links em coluna no mobile */
         gap: 10px;
         text-align: center;
     }
@@ -868,27 +820,17 @@ footer {
 
     .user-actions {
         order: 2;
-        /* Move para antes do toggle em telas menores */
         gap: 10px;
         margin-left: auto;
-        /* Garante que fiquem à direita */
     }
 
     .menu-toggle {
         display: block;
-        /* Mostrar botão de menu em telas menores */
-        order: 1;
-        /* Mover para o início */
-        margin-left: 20px;
+        order: 3; /* CORRIGIDO: Move o menu hamburguer para o final */
     }
 
     header .container {
         justify-content: space-between;
-        /* Ajusta novamente para ter espaço entre logo e user-actions/toggle */
-    }
-
-    .logo {
-        /* Nenhuma mudança aqui para manter o margin-right: auto padrão do Flexbox */
     }
 
     .hero-content h1 {
@@ -955,7 +897,23 @@ footer {
     }
 
     .hero-banner {
-        height: 450px;
+        justify-content: center; /* CORRIGIDO: Centraliza o container do texto */
+        text-align: center; /* CORRIGIDO: Centraliza o texto dentro do container */
+    }
+
+    .hero-banner::before {
+        /* Gradiente mais suave para fundo centralizado */
+        background: linear-gradient(180deg, rgba(11, 10, 15, 0.4) 0%, var(--main-content-background) 100%);
+    }
+
+    .hero-content {
+        max-width: 100%; /* Permite que o conteúdo ocupe mais espaço */
+        text-align: center; /* Garante que o texto dentro dele esteja centralizado */
+    }
+    
+    .hero-actions {
+         max-width: 100%; /* Permite que o conteúdo ocupe mais espaço */
+        justify-content: center; /* Centraliza os botões */
     }
 
     .hero-content h1 {
