@@ -191,12 +191,22 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: nowrap; /* Impede a quebra de linha */
+    flex-wrap: nowrap; /* Impede a quebra de linha por padrão */
+    position: relative; /* MODIFICAÇÃO: Adicionado para ser a referência da navegação */
 }
 
 .logo {
-    margin-right: auto;
+    /* MODIFICAÇÃO: margin-right: auto foi removido para permitir a centralização */
     font-size: 30px;
+
+}
+
+/* MODIFICAÇÃO: Centralização da navegação principal */
+.main-nav {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .main-nav ul {
@@ -233,7 +243,7 @@ header .container {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-left: 30px;
+    /* MODIFICAÇÃO: Removido margin-left para não interferir com a centralização */
 }
 
 .menu-toggle {
@@ -246,8 +256,6 @@ header .container {
 }
 
 /* --- BANNER PRINCIPAL (HERO) --- */
-
-
 .hero-banner {
     position: relative;
     height: 75vh;
@@ -795,38 +803,63 @@ footer {
     font-weight: bold;
 }
 
-/* --- MODIFICADO: Responsividade --- */
 @media (max-width: 992px) {
+    /**************************************************************************************
+    *
+    * MODIFICAÇÃO PARA RESPONSIVIDADE DO HEADER (MENU HAMBÚRGUER)
+    *
+    **************************************************************************************/
+    header .container {
+        flex-wrap: nowrap; /* MODIFICADO: Impede que o menu quebre para a linha de baixo */
+    }
+
     .main-nav {
         display: none;
         width: 100%;
-        order: 3;
-        margin-top: 20px;
+        order: 3; /* Garante que o menu venha por último */
+        margin-top: 15px;
+        /* Adicionado um fundo para destacar o menu quando aberto */
+        background-color: rgba(11, 10, 15, 0.85); 
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border-radius: 8px;
+        padding: 10px 0;
+        position: static;
+        transform: none;
     }
 
     .main-nav.active {
-        display: block;
+        display: block; /* Mostra o menu quando a classe .active é adicionada */
     }
 
     .main-nav ul {
         flex-direction: column;
-        gap: 10px;
+        gap: 0;
         text-align: center;
     }
 
-    .main-nav li {
-        width: 100%;
+    .main-nav ul li a {
+        display: block;
+        padding: 15px;
     }
-
+    
     .user-actions {
-        order: 2;
-        gap: 10px;
-        margin-left: auto;
+        margin-left: auto; /* Empurra as ações do usuário para a direita, ao lado do logo */
     }
 
     .menu-toggle {
         display: block;
-        order: 3; /* CORRIGIDO: Move o menu hamburguer para o final */
+        order: 2;
+        margin-left: 15px; /* Espaço entre ações e o botão de menu */
+    }
+
+    .logo {
+        margin-right: 10px; 
+        font-size: 20px; /* ADICIONADO: Tamanho final da logo para ecrãs pequenos */
+    }
+
+    .user-actions {
+        margin-left: 0; /* Reseta qualquer margem anterior */
     }
 
     header .container {
@@ -882,46 +915,40 @@ footer {
 }
 
 @media (max-width: 768px) {
-    header .container {
-        padding: 0 15px;
-    }
-
-    .user-actions a {
-        font-size: 0.9em;
-        gap: 3px;
-    }
-
-    .user-actions .btn {
-        padding: 8px 12px;
-        font-size: 0.9em;
-    }
-
+    /* MODIFICAÇÃO: Centraliza o conteúdo do banner */
     .hero-banner {
-        justify-content: center; /* CORRIGIDO: Centraliza o container do texto */
-        text-align: center; /* CORRIGIDO: Centraliza o texto dentro do container */
+        justify-content: center; /* Centraliza o container do texto */
     }
 
     .hero-banner::before {
         /* Gradiente mais suave para fundo centralizado */
-        background: linear-gradient(180deg, rgba(11, 10, 15, 0.4) 0%, var(--main-content-background) 100%);
+        background: linear-gradient(to top, rgba(11, 10, 15, 1) 5%, rgba(11, 10, 15, 0) 70%);
     }
 
     .hero-content {
-        max-width: 100%; /* Permite que o conteúdo ocupe mais espaço */
+        max-width: 90%; /* Permite que o conteúdo ocupe mais espaço */
         text-align: center; /* Garante que o texto dentro dele esteja centralizado */
     }
     
     .hero-actions {
-         max-width: 100%; /* Permite que o conteúdo ocupe mais espaço */
         justify-content: center; /* Centraliza os botões */
     }
 
     .hero-content h1 {
-        font-size: 2em;
+        font-size: 2.5rem;
     }
 
     .hero-content p {
-        font-size: 0.9em;
+        font-size: 1rem;
+    }
+
+    .logo {
+        margin-right: 10px;
+        font-size: 20px; /* ADICIONADO: Reduz ainda mais a logo */
+    }
+
+    .user-actions {
+        margin-left: 0;
     }
 
     .content-grid {
@@ -950,6 +977,7 @@ footer {
     }
 }
 
+
 @media (max-width: 576px) {
     .hero-banner {
         height: 600px;
@@ -957,6 +985,7 @@ footer {
 
     .hero-content {
         padding: 15px;
+        margin-left: 20px;
     }
 
     .hero-content h1 {
@@ -982,6 +1011,7 @@ footer {
     .content-grid {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: 10px;
+        margin-left: 11px;
     }
 
     .content-card img {
@@ -1002,5 +1032,15 @@ footer {
 
     .details-description {
         font-size: 0.9em;
+    }
+
+    /* AJUSTE FINAL DA LOGO PARA TELEMÓVEIS */
+    .logo {
+        margin-right: 10px; 
+        font-size: 20px; /* ADICIONADO: Tamanho final da logo para ecrãs pequenos */
+    }
+
+    .user-actions {
+        margin-left: 0px;
     }
 }
