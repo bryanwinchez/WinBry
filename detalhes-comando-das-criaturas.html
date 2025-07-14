@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WinBry+ | Comando das Criaturas</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body class="dark-mode">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a class="btn-log" href="index.html">WinBry+</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="filmes.html">Filmes</a></li>
+                    <li><a href="series.html" class="active">Séries</a></li>
+                    <li><a href="animes.html">Animes</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <a id="theme-toggle" class="icon-btn"><i class="fas fa-sun"></i></a>
+                <a href="formulario.html" class="icon-btn"><i class="fas fa-comments"></i></a>
+                <a href="minha-lista.html" class="icon-btn"><i class="fas fa-bookmark"></i></a>
+                <a id="user-action" href="login.html" class="btn btn-primary">Entrar</a>
+            </div>
+            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main>
+        <section class="details-hero">
+            <div class="container">
+                <img src="comando-das-criaturas.jpg" alt="Poster do Filme Exemplo" class="details-poster">
+                <div class="details-info">
+                    <h1>Comando das Criaturas</h1>
+                    <p class="details-meta">2025 • 16 • 1 Temporada</p>
+                    <p class="details-description">
+                        Amanda Waller monta um time de monstros superpoderosos para missões secretas e perigosas — entre
+                        lobisomens, vampiros e criaturas geneticamente modificadas, a luta para salvar o mundo vira uma
+                        batalha épica de sobrevivência e redenção.
+                    </p>
+                    <div class="details-actions">
+                        <form id="form-assistir" action="comando-das-criaturas.html">
+                            <button class="btn btn-play"><i class="fas fa-play"></i> Assistir</button>
+                        </form>
+                        <button class="btn btn-secondary btn-adicionar-lista"><i class="fas fa-plus"></i> Adicionar à
+                            Minha Lista</button>
+                        <button class="btn btn-secondary"><i class="fas fa-share-alt"></i> Compartilhar</button>
+                    </div>
+                    <div class="details-cast">
+                        <h3>Elenco Principal</h3>
+                        <p> Frank Grillo, Indira Varma, David Harbour, Alan Tudyk, Zoë Chao, Maria Bakalova, Sean Gunn,
+                            Viola Davis, Steve Agee, Anya Chalotra.</p>
+                    </div>
+                    <div class="details-genres">
+                        <h3>Gêneros</h3>
+                        <p>Ação, Animação, Comédia Negra, Drama, Super‑Herói, Horror </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>Conteúdo Relacionado</h2>
+                <div class="content-grid">
+                    <a href="detalhes-homem-formiga-quantumania.html" class="content-card">
+                        <img src="homem-formiga-quantumania.jpg" alt="Poster do Filme 1">
+                        <div class="card-info">
+                            <h3>Homem-Formiga e a Vespa: Quantumania</h3>
+                            <p>2023 • Ficção Científica</p>
+                        </div>
+                    </a>
+                    <a href="detalhes-loki.html" class="content-card">
+                        <img src="loki.jpg" alt="Poster da Série 3">
+                        <div class="card-info">
+                            <h3>Loki</h3>
+                            <p>2021-2023 • Ficção Científica</p>
+                        </div>
+                    </a>
+                    <a href="detalhes-the-boys.html" class="content-card">
+                        <img src="the-boys.jpg" alt="Poster da Série 2">
+                        <div class="card-info">
+                            <h3>The Boys</h3>
+                            <p>2019 • Ação</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 WinBry+ | Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"> </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const btnAdicionar = document.querySelector(".btn-adicionar-lista");
+
+            if (btnAdicionar) {
+                btnAdicionar.addEventListener("click", () => {
+                    const item = {
+                        id: "comando-das-criaturas",
+                        titulo: "Comando das Criaturas",
+                        poster: "comando-das-criaturas.jpg",
+                        ano: "2025",
+                        genero: "Super-Herói",
+                        detalhesUrl: "detalhes-comando-das-criaturas.html"
+                    };
+
+                    const lista = JSON.parse(localStorage.getItem("minhaLista")) || [];
+                    const jaExiste = lista.some(i => i.id === item.id);
+
+                    if (!jaExiste) {
+                        lista.push(item);
+                        localStorage.setItem("minhaLista", JSON.stringify(lista));
+                        alert("Adicionado à sua lista!");
+                    } else {
+                        alert("Este item já está na sua lista.");
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (isLoggedIn && user) {
+                const avatar = user.profileImage || 'img/perfil-generico.jpg';
+                const btn = document.getElementById('user-action');
+                btn.outerHTML = `
+          <a href="minha-conta.html" class="profile-btn" title="${user.username}">
+            <img src="${avatar}" alt="Perfil" class="profile-img"/>
+          </a>`;
+            }
+        });
+    </script>
+    <style>
+        .profile-btn {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+</body>
+
+</html>
