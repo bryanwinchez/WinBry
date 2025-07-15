@@ -357,9 +357,9 @@ button {
 }
 
 .hub-card {
-    margin-top: 50px;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
     flex: 0 0 220px; /* MUDANÇA: Define um tamanho base para os cards para que não sejam espremidos */
     background-color: var(--card-background); /* CORREÇÃO: Variável de cor corrigida */
     border-radius: 12px;
