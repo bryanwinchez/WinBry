@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WinBry+ | Naruto</title>
+    <title>WinBry+ | 101 Dálmatas (1961)</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -19,9 +19,9 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html">Início</a></li>
-                    <li><a href="filmes.html">Filmes</a></li>
+                    <li><a href="filmes.html" class="active">Filmes</a></li>
                     <li><a href="series.html">Séries</a></li>
-                    <li><a href="animes.html" class="active">Animes</a></li>
+                    <li><a href="animes.html">Animes</a></li>
                 </ul>
             </nav>
             <div class="user-actions">
@@ -37,15 +37,15 @@
     <main>
         <section class="details-hero">
             <div class="container">
-                <img src="naruto.jpg" alt="Poster do Filme Exemplo" class="details-poster">
+                <img src="101-dalmatas.jpg" alt="Poster do Filme Exemplo" class="details-poster">
                 <div class="details-info">
-                    <h1>Naruto</h1>
-                    <p class="details-meta">2002-2007 • 12 • 220 Episódios</p>
+                    <h1>101 Dálmatas</h1>
+                    <p class="details-meta">1961 • L • 1h19min</p>
                     <p class="details-description">
-                       Naruto busca se tornar Hokage e conquistar respeito, enfrentando inimigos e carregando a raposa de nove caudas dentro de si.
+                       Quando a vilã Cruella De Vil sequestra uma ninhada de filhotes dálmatas para fazer casacos de pele, os corajosos pais Pongo e Prenda embarcam em uma missão emocionante para resgatá-los. Com a ajuda de vários animais pelo interior da Inglaterra, eles enfrentam perigos e superam obstáculos para salvar seus filhotes – e outros mais.
                     </p>
                     <div class="details-actions">
-                        <form id="form-assistir" action="naruto.html">
+                        <form id="form-assistir" action="101-dalmatas.html">
                             <button class="btn btn-play"><i class="fas fa-play"></i> Assistir</button>
                         </form>
                         <button class="btn btn-secondary btn-adicionar-lista"><i class="fas fa-plus"></i> Adicionar à
@@ -54,11 +54,11 @@
                     </div>
                     <div class="details-cast">
                         <h3>Elenco Principal</h3>
-                        <p>Junko Takeuchi, Noriaki Sugiyama, Chie Nakamura, Kazuhiko Inoue.</p>
+                        <p>Rod Taylor, Cate Bauer, Betty Lou Gerson, Ben Wright, Lisa Davis, Martha Wentworth, Frederick Worlock, J. Pat O'Malley, Thurl Ravenscroft, Barbara Beaird, Mickey Maga.</p>
                     </div>
                     <div class="details-genres">
                         <h3>Gêneros</h3>
-                        <p>Ação, Aventura, Ninja</p>
+                        <p>Animação, Aventura, Comédia, Família</p>
                     </div>
                 </div>
             </div>
@@ -112,12 +112,12 @@
             if (btnAdicionar) {
                 btnAdicionar.addEventListener("click", () => {
                     const item = {
-                        id: "naruto",
-                        titulo: "Naruto",
-                        poster: "naruto.jpg",
-                        ano: "2002-2007",
+                        id: "101-dalmatas",
+                        titulo: "101 Dálmatas",
+                        poster: "101-dalmatas.jpg",
+                        ano: "1961",
                         genero: "Fantasia",
-                        detalhesUrl: "detalhes-naruto.html"
+                        detalhesUrl: "detalhes-101-dalmatas.html"
                     };
 
                     const lista = JSON.parse(localStorage.getItem("minhaLista")) || [];
